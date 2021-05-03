@@ -19,7 +19,3 @@ vr_extract <- function(x){
   i <- x %>% Biostrings::subseq(start= 57, width = 36)
   Biostrings::translate(i)
 }
-
-test <- mclapply(bc_subset, vr_extract)
-test2 <- mclapply(test, counter)
-test2
