@@ -17,8 +17,7 @@ subseter <- function(bc){
 
 vr_extract <- function(x){
   i <- x %>% Biostrings::subseq(start= 57, width = 36)
-  t_i <- Biostrings::translate(i)
-  t_i
+  Biostrings::translate(i)
 }
 
 test <- mclapply(bc_subset, vr_extract)
