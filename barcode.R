@@ -28,8 +28,3 @@ names(blist) <- seq_str
 
 # This applys the barcode list to the raw_data file, and subsets sequences based on the barcodes
 bc_subset <- mclapply(blist, subseter) %>% DNAStringSetList()
-
-bc_subset
-
-
-barcode_count$count
