@@ -5,7 +5,7 @@ counter <- function(xstring, mismatch = 0){
   unique_x <- unique(xstring)
   x <- vcountPDict(unique_x,xstring, collapse = 1, max.mismatch = mismatch)
   dat <- DataFrame(seq = unique_x, count = x)
-  dat
+  rev(dat[(order(dat$count)),])
 }
 
 
@@ -15,3 +15,12 @@ subseter <- function(bc){
   raw_dat[c,]
 }
 
+vr_extract <- function(x){
+  i <- x %>% Biostrings::subseq(start= 57, width = 36)
+  t_i <- Biostrings::translate(i)
+  t_i
+}
+
+test <- mclapply(bc_subset, vr_extract)
+test2 <- mclapply(test, counter)
+test2
