@@ -8,9 +8,10 @@ counter <- function(xstring, mismatch = 0){
   dat
 }
 
+
 subseter <- function(bc){
   bc <- DNAString(bc)
-  c <- vcountPattern(bc, barcodes)
+  c <- countPDict(barcodes, bc, max.mismatch = 0) %>% as.logical()
   raw_dat[c,]
 }
 
