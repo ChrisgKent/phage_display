@@ -13,9 +13,18 @@ counter <- function(xstring, mismatch = 0, mc = FALSE){
   }else{x <- vcountPDict(unique_x,xstring, collapse = 1, max.mismatch = mismatch)
   dat <- DataFrame(seq = unique_x, count = x)
   }
-  rev(dat[(order(dat$count)),])
+  rev(dat[(order(dat$count, dat$seq)),])
 }
 
+# A version of counter, with vastly quicker runtimes
+tabler <- function(x){
+  i <- table(x) %>% 
+    as.data.frame() %>%
+    arrange(by=desc(Freq))
+  i <- DataFrame(seq = DNAStringSet(i[,1]), 
+                 freq = i[,2])
+  i
+}
 
 subseter <- function(bc){
   bc <- DNAString(bc)

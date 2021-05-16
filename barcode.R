@@ -14,13 +14,7 @@ raw_dat <- sread(raw_fastq) %>% DNAStringSet()
 #Extracts the section of the sequene where the barcode is expected.
 #Counter determins the number of time a single barcode pattern has been read
 barcodes <- Biostrings::subseq(raw_dat, start = 50, width = 6)
-
-barcode_count <- table(barcodes) %>% 
-  as.data.frame() %>% 
-  arrange(by=desc(Freq))
-
-barcode_count <- DataFrame(seq = DNAStringSet(barcode_count[,1]), 
-                           freq = barcode_count[,2])
+barcode_count <- tabler(barcodes)
 
 write_delim(as.data.frame(barcode_count), "PRIVATE_DO_NOT_COMMIT/files/barcode_count.txt", col_names = FALSE)
 
@@ -34,5 +28,6 @@ names(blist) <- seq_str
 
 # This applys the barcode list to the raw_data file, and subsets sequences based on the barcodes
 bc_subset <- mclapply(blist, subseter) %>% DNAStringSetList()
+
 
 
